@@ -4,8 +4,6 @@ Version 1.0 CheeCell
 Developed By James Chee(Youngchae Chee) @Litcoderr
 You are welcome to contribute!!
 '''
-
-import numpy as np
 import random
 
 class Softmax_Cell:
@@ -13,8 +11,8 @@ class Softmax_Cell:
     def __init__(self,weightNum):
         self.weights = []
         self.weights_Number = weightNum
-        self.forwarded_val = 0
-        self.backwarded_val= 0
+        self.In = 0
+        self.Out= 0
 
         # 1. initialize Weights
         self.initializeWeights()
@@ -22,4 +20,4 @@ class Softmax_Cell:
     def initializeWeights(self):
         self.weights = []
         for _ in range(self.weights_Number):
-            self.weights.append(1000*random.random())
+            self.weights.append(10*random.random())

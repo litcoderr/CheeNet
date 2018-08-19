@@ -4,8 +4,6 @@ Version 1.0 CheeLayer
 Developed By James Chee(Youngchae Chee) @Litcoderr
 You are welcome to contribute!!
 '''
-
-import numpy as np
 import CheeCell_v1 as nc #Custom Neural Cell Class
 
 class Layer:
