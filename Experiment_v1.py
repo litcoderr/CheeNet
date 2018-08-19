@@ -9,7 +9,7 @@ import CheeNet_v1 as CheeNet
 
 if __name__ == '__main__':
     NN = CheeNet.NeuralNet()
-    NN.add_Layer(2,3)
-    NN.add_Layer(3,1)
-    NN.add_Layer(1,1)
-    NN.print_Layer()
+    NN.add_Layer('softmax',2,3)
+    NN.add_Layer('softmax',3,1)
+    NN.add_Layer('softmax',1,1)
+    NN.feedforward()

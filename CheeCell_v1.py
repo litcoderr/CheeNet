@@ -8,7 +8,7 @@ You are welcome to contribute!!
 import numpy as np
 import random
 
-class Cell:
+class Softmax_Cell:
     
     def __init__(self,weightNum):
         self.weights = []

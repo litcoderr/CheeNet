@@ -13,10 +13,23 @@ class NeuralNet:
         # Layer Storage: Can access Every layer of this Net
         self.NNLayer = []
 
+        # Training Data Sets
+
+        self.training_input = []
+        self.training_output = []
+
         print('Initial Neural Net Call')
         
-    def add_Layer(self,input_d,output_d):
-        self.NNLayer.append(nl.Layer(input_d,output_d))
+    def add_Layer(self,layer_type,input_d,output_d):
+        self.NNLayer.append(nl.Layer(layer_type,input_d,output_d))
+
+    def add_trainingSet(self,training_input,training_output):
+        self.training_input = training_input
+        self.training_output = training_output
+
+    def feedforward(self):
+        #TODO make feedforwarding funciton
+        print('I feed forward')
 
     def print_Layer(self):
         for i in range(len(self.NNLayer)):
@@ -25,5 +38,3 @@ class NeuralNet:
                 print('Cell ',j)
                 for k in range(len(self.NNLayer[i].NNCell[j].weights)):
                     print('w',k,' val: ',self.NNLayer[i].NNCell[j].weights[k])
-
-    
