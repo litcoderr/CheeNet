@@ -6,7 +6,7 @@ You are welcome to contribute!!
 '''
 import random
 
-class Softmax_Cell:
+class Cell:
     
     def __init__(self,weightNum):
         self.weights = []

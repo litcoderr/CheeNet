@@ -60,23 +60,15 @@ class NeuralNet:
                 self.NNLayer[0].NNCell[i].In = input_x[i]
             # 2. Iterate to the last layer
             for layerIndex in range(1,len(self.NNLayer)):
-                for cellIndex in range(len(self.NNLayer[layerIndex].NNCell)):
-                    # temp to be stored
-                    self.temp = 0
-                    # previous layer cell number
-                    self.prev_cell_num = self.NNLayer[layerIndex-1].input_dimension
-
-                    # 1. calculate and store to temp
-                    for i in range(self.prev_cell_num):
-                        self.temp = self.temp+(self.NNLayer[layerIndex-1].NNCell[i].In*self.NNLayer[layerIndex-1].NNCell[i].weights[cellIndex])
-                    
-                    # 2. update In for this cell
-                    self.NNLayer[layerIndex].NNCell[cellIndex].In = self.temp
-
+                #TODO make custom feeding function for each Layer
+                self.NNLayer[layerIndex].feedingProcess(self.NNLayer[layerIndex-1])
         else:
             print('Error: feeforward() --> Input_X has invalid dimension')
 
 ############# Debugging Methods ################
+    def print_Result(self):
+        for i in range(len(self.NNLayer[-1].NNCell)):
+            print(self.NNLayer[-1].NNCell[i].In,end=" ")
     def print_Layer(self):
         for i in range(len(self.NNLayer)):
             for j in range(len(self.NNLayer[i].NNCell)):
