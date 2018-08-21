@@ -47,7 +47,7 @@ class Layer:
             # 1. calculate sum
             for cellIndex in range(len(self.NNCell)):
                 self.temporary_sum = self.temporary_sum + self.NNCell[cellIndex].In
-            # 2. Update every sum with logits
+            # 2. Update every cell with logits
             for cellIndex in range(len(self.NNCell)):
                 self.NNCell[cellIndex].In = self.NNCell[cellIndex].In / self.temporary_sum
 
