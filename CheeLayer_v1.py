@@ -43,7 +43,13 @@ class Layer:
             for cellIndex in range(len(self.NNCell)):
                 self.NNCell[cellIndex].In = 1/(1+math.exp(-self.NNCell[cellIndex].In))
         elif self.layer_type == 'softmax':
-            print('I am softmax')
+            self.temporary_sum = 0 # sum of every cell in the layer
+            # 1. calculate sum
+            for cellIndex in range(len(self.NNCell)):
+                self.temporary_sum = self.temporary_sum + self.NNCell[cellIndex].In
+            # 2. Update every sum with logits
+            for cellIndex in range(len(self.NNCell)):
+                self.NNCell[cellIndex].In = self.NNCell[cellIndex].In / self.temporary_sum
 
     def initializeCells(self):
         for _ in range(self.input_dimension):

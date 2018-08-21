@@ -60,7 +60,6 @@ class NeuralNet:
                 self.NNLayer[0].NNCell[i].In = input_x[i]
             # 2. Iterate to the last layer
             for layerIndex in range(1,len(self.NNLayer)):
-                #TODO make custom feeding function for each Layer
                 self.NNLayer[layerIndex].feedingProcess(self.NNLayer[layerIndex-1])
         else:
             print('Error: feeforward() --> Input_X has invalid dimension')
