@@ -74,7 +74,9 @@ class NeuralNet:
             self.valid = False
         
         if self.valid:
-            print('hurray!!')
+            #for softmax loss
+            if self.NNLayer[-1].layer_type == 'softmax':
+                print('do softmax loss with logits')
         else:
             print('Error calculate_loss() --> Wrong input or output dimensions')
 
