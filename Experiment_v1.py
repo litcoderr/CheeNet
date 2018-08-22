@@ -14,3 +14,5 @@ if __name__ == '__main__':
     NN.add_Layer('softmax',2,1)
     NN.feedforward([1,2])
     NN.print_Result()
+    NN.add_trainingSet([[1,2],[2,3]],[[1,0],[0,1]])
+    NN.print_training_data()

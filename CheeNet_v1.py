@@ -68,9 +68,14 @@ class NeuralNet:
     def print_Result(self):
         for i in range(len(self.NNLayer[-1].NNCell)):
             print(self.NNLayer[-1].NNCell[i].In,end=" ")
+
     def print_Layer(self):
         for i in range(len(self.NNLayer)):
             for j in range(len(self.NNLayer[i].NNCell)):
                 print((i,j),' In: ',self.NNLayer[i].NNCell[j].In,'Out: ',self.NNLayer[i].NNCell[j].Out)
                 for k in range(len(self.NNLayer[i].NNCell[j].weights)):
                     print('w',k,' val: ',self.NNLayer[i].NNCell[j].weights[k])
+
+    def print_training_data(self):
+        print("--train Data--")
+        print("X: ",self.training_input," ,Y: ",self.training_output)
