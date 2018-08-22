@@ -64,6 +64,20 @@ class NeuralNet:
         else:
             print('Error: feeforward() --> Input_X has invalid dimension')
 
+    def calculate_loss(self,input_x,target_y):
+        # Check if input_x is valid
+        self.valid = True
+        if len(input_x) != self.NNLayer[0].input_dimension:
+            self.valid = False
+        #Check if target_y is valid
+        if len(target_y) != self.NNLayer[-1].input_dimension:
+            self.valid = False
+        
+        if self.valid:
+            print('hurray!!')
+        else:
+            print('Error calculate_loss() --> Wrong input or output dimensions')
+
 ############# Debugging Methods ################
     def print_Result(self):
         for i in range(len(self.NNLayer[-1].NNCell)):
