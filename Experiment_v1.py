@@ -14,4 +14,4 @@ if __name__ == '__main__':
     NN.add_Layer('sigmoid',3,2)
     NN.add_Layer('softmax',2,1)
     NN.feedforward([1,2])
-    NN.calculate_loss([1,2],[1,0])
+    print(NN.calculate_loss([1,0]))

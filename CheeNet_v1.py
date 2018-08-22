@@ -16,6 +16,9 @@ class NeuralNet:
         self.training_input = []
         self.training_output = []
 
+        # Loss
+        self.current_Loss = 100 # may change
+
         # Error Detection variables
         self.addingLayer_ErrorSwitch = True
         self.currentNetdim = 0
@@ -64,21 +67,18 @@ class NeuralNet:
         else:
             print('Error: feeforward() --> Input_X has invalid dimension')
 
-    def calculate_loss(self,input_x,target_y):
-        # Check if input_x is valid
+    def calculate_loss(self,target_y):
         self.valid = True
-        if len(input_x) != self.NNLayer[0].input_dimension:
-            self.valid = False
         #Check if target_y is valid
         if len(target_y) != self.NNLayer[-1].input_dimension:
             self.valid = False
         
         if self.valid:
-            #for softmax loss
-            if self.NNLayer[-1].layer_type == 'softmax':
-                print('do softmax loss with logits')
+            # if valid process loss and return it
+            return self.NNLayer[-1].lossProcess(target_y)
         else:
             print('Error calculate_loss() --> Wrong input or output dimensions')
+            return 0
 
 ############# Debugging Methods ################
     def print_Result(self):

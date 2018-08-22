@@ -23,6 +23,7 @@ class Layer:
         # 1. Make the initial cells
         self.initializeCells()
 
+    # Called when feeding is needed
     def feedingProcess(self,previous_layer):
         self.pre_layer = previous_layer
         for cellIndex in range(len(self.NNCell)):
@@ -50,7 +51,18 @@ class Layer:
             # 2. Update every cell with logits
             for cellIndex in range(len(self.NNCell)):
                 self.NNCell[cellIndex].In = self.NNCell[cellIndex].In / self.temporary_sum
-
+    
+    # Called when loss is needed
+    def lossProcess(self,target_y):
+        self.temp_loss = 0
+        # Softmax loss function
+        if self.layer_type == 'softmax':
+            for cell_index in range(len(self.NNCell)):
+                self.temp_loss = self.temp_loss + (-1)*target_y[cell_index]*math.log(self.NNCell[cell_index].In)
+        
+        return self.temp_loss
+    
+    # Initialize all cells in this layer
     def initializeCells(self):
         for _ in range(self.input_dimension):
             self.NNCell.append(nc.Cell(self.output_dimension))
