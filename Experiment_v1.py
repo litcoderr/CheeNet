@@ -9,9 +9,8 @@ import CheeNet_v1 as CheeNet
 if __name__ == '__main__':
     NN = CheeNet.NeuralNet()
     NN.add_Layer('sigmoid',2,3)
-    NN.add_Layer('sigmoid',3,4)
-    NN.add_Layer('sigmoid',4,3)
-    NN.add_Layer('softmax',3,1)
+    NN.add_Layer('sigmoid',3,3)
+    NN.add_Layer('sigmoid',3,2)
+    NN.add_Layer('softmax',2,1)
     NN.feedforward([1,2])
-    NN.print_Layer()
     NN.print_Result()
