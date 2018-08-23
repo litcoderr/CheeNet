@@ -1,8 +1,8 @@
 # Welcome to CheeNet
-###What is CheeNet###
+### What is CheeNet
 A Custom-made Framework of Neural Network. Anyone can use this for simple training and actually understand the fundamentals of Neural Network by observing the code.
 
-###How to Use the Library###
+### How to Use the Library
 1. Download(Clone) this repository to your project folder.
 **Terminal**
 ```
