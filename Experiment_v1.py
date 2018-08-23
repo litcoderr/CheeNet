@@ -13,3 +13,5 @@ if __name__ == '__main__':
     NN.add_Layer('sigmoid',3,2)
     NN.add_Layer('softmax',2,1)
     NN.train()
+    NN.feedforward([1,2])
+    NN.print_Result()
