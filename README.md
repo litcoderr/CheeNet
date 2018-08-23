@@ -22,7 +22,12 @@ NN = CheeNet_v1.NeuralNetwork(learning_rate=0.1,epochs=10000,limit=0.1)
 - epochs
 - limit
 
-4. Design the Network <br />
+4. Add training Sets
+```python
+NN.add_trainingSet([[0,0],[1,0],[0,1],[1,1]],[[1,0],[0,1],[0,1],[1,0]])
+```
+
+5. Design the Network <br />
 **Code Example**
 ```python
 NN.add_Layer('sigmoid',2,3)
@@ -31,7 +36,7 @@ NN.add_Layer('sigmoid',4,3)
 NN.add_Layer('sigmoid',3,2)
 NN.add_Layer('softmax',2,1)
 ```
-5. Train the Network
+6. Train the Network
 ```python
 NN.train()
 ```
