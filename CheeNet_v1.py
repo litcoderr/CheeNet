@@ -8,9 +8,11 @@ import CheeLayer_v1 as nl # Custom Neural Layer Class
 
 class NeuralNet:
 
-    def __init__(self,learning_rate=0.1):
+    def __init__(self,learning_rate=0.1,epochs=4000,limit=0.01):
         # *** Hyper Parameters ***
         self.learning_rate = learning_rate
+        self.epochs = epochs
+        self.limit = limit
 
         # Layer Storage: Can access Every layer of this Net
         self.NNLayer = []
@@ -54,16 +56,18 @@ class NeuralNet:
         self.training_output = training_output
 
     def train(self):
-        for trainingSet in range(len(self.training_input)):
-            self.doneTraining = True
-            while self.doneTraining:
-                self.feedforward(self.training_input[trainingSet])
-                self.temp_loss = self.calculate_loss(self.training_output[trainingSet])
-                print("training loss : ",self.temp_loss)
-                if self.temp_loss < 0.01:
-                    self.doneTraining = False
-                else:
-                    self.back_propagate(self.training_output[trainingSet],self.learning_rate)
+        for epochs in range(self.epochs):
+            for trainingSet in range(len(self.training_input)):
+                self.doneTraining = True
+                while self.doneTraining:
+                    self.feedforward(self.training_input[trainingSet])
+                    self.temp_loss = self.calculate_loss(self.training_output[trainingSet])
+                    if self.temp_loss < self.limit:
+                        self.doneTraining = False
+                    else:
+                        self.back_propagate(self.training_output[trainingSet],self.learning_rate)
+                if epochs % 10 == 0:
+                    print("training loss : ",self.calculate_loss(self.training_output[trainingSet]))
 
     def feedforward(self,input_x):
         # Check if input_x is valid
