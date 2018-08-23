@@ -66,19 +66,24 @@ class Layer:
         return self.temp_loss
     
     # Back Propagate
-    def backProcess(self,prev_layer,target_y):
+    def backProcess(self,prev_layer,target_y,learning_rate):
         # calculate derivative
         if self.layer_type == 'softmax':
             for i in range(self.input_dimension):
                 self.Derivatives[i] = self.NNCell[i].In - target_y[i]
         elif self.layer_type == 'sigmoid':
-            print('sigmoid back')
+            for i in range(self.input_dimension):
+                self.Derivatives[i] = self.Derivatives[i] * (self.NNCell[i].In*(1-self.NNCell[i].In))
 
         # send upstream gradient to lower layer
         for cell_index in range(self.input_dimension):
             for before_index in range(prev_layer.input_dimension):
                 prev_layer.Derivatives[before_index] = prev_layer.Derivatives[before_index] + self.Derivatives[cell_index] * prev_layer.NNCell[before_index].weights[cell_index]
-        
+
+        # Update Every weights making this layer
+        for cell_index in range(self.input_dimension):
+            for before_index in range(prev_layer.input_dimension):
+                prev_layer.NNCell[before_index].weights[cell_index] = prev_layer.NNCell[before_index].weights[cell_index] - (learning_rate)*(prev_layer.NNCell[before_index].In)*self.Derivatives[cell_index]
     # Initialize all cells in this layer
     def initializeCells(self):
         for _ in range(self.input_dimension):

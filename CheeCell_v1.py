@@ -12,7 +12,6 @@ class Cell:
         self.weights = []
         self.weights_Number = weightNum
         self.In = 0
-        self.Out= 0
 
         # 1. initialize Weights
         self.initializeWeights()

@@ -8,7 +8,10 @@ import CheeLayer_v1 as nl # Custom Neural Layer Class
 
 class NeuralNet:
 
-    def __init__(self):
+    def __init__(self,learning_rate=0.1):
+        # *** Hyper Parameters ***
+        self.learning_rate = learning_rate
+
         # Layer Storage: Can access Every layer of this Net
         self.NNLayer = []
 
@@ -50,6 +53,18 @@ class NeuralNet:
         self.training_input = training_input
         self.training_output = training_output
 
+    def train(self):
+        for trainingSet in range(len(self.training_input)):
+            self.doneTraining = True
+            while self.doneTraining:
+                self.feedforward(self.training_input[trainingSet])
+                self.temp_loss = self.calculate_loss(self.training_output[trainingSet])
+                print("training loss : ",self.temp_loss)
+                if self.temp_loss < 0.01:
+                    self.doneTraining = False
+                else:
+                    self.back_propagate(self.training_output[trainingSet],self.learning_rate)
+
     def feedforward(self,input_x):
         # Check if input_x is valid
         self.valid = False
@@ -80,9 +95,9 @@ class NeuralNet:
             print('Error calculate_loss() --> Wrong input or output dimensions')
             return 0
     
-    def back_propagate(self,target_y):
+    def back_propagate(self,target_y,learning_rate):
         for layer_index in range(len(self.NNLayer)-1,0,-1):
-            self.NNLayer[layer_index].backProcess(self.NNLayer[layer_index-1],target_y)
+            self.NNLayer[layer_index].backProcess(self.NNLayer[layer_index-1],target_y,learning_rate)
 
 ############# Debugging Methods ################
     def print_Result(self):
@@ -92,14 +107,14 @@ class NeuralNet:
     def print_Layer(self):
         for i in range(len(self.NNLayer)):
             for j in range(len(self.NNLayer[i].NNCell)):
-                print((i,j),' In: ',self.NNLayer[i].NNCell[j].In,'Out: ',self.NNLayer[i].NNCell[j].Out)
+                print((i,j),' In: ',self.NNLayer[i].NNCell[j].In)
                 for k in range(len(self.NNLayer[i].NNCell[j].weights)):
                     print('w',k,' val: ',self.NNLayer[i].NNCell[j].weights[k])
     
     def print_derivative(self):
         for layer in range(len(self.NNLayer)):
-            print(self.NNLayer[layer].Derivatives
-            )
+            print(self.NNLayer[layer].Derivatives)
+
     def print_training_data(self):
         print("--train Data--")
         print("X: ",self.training_input," ,Y: ",self.training_output)
