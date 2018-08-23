@@ -79,6 +79,10 @@ class NeuralNet:
         else:
             print('Error calculate_loss() --> Wrong input or output dimensions')
             return 0
+    
+    def back_propagate(self,target_y):
+        for layer_index in range(len(self.NNLayer)-1,0,-1):
+            self.NNLayer[layer_index].backProcess(self.NNLayer[layer_index-1],target_y)
 
 ############# Debugging Methods ################
     def print_Result(self):
@@ -91,7 +95,11 @@ class NeuralNet:
                 print((i,j),' In: ',self.NNLayer[i].NNCell[j].In,'Out: ',self.NNLayer[i].NNCell[j].Out)
                 for k in range(len(self.NNLayer[i].NNCell[j].weights)):
                     print('w',k,' val: ',self.NNLayer[i].NNCell[j].weights[k])
-
+    
+    def print_derivative(self):
+        for layer in range(len(self.NNLayer)):
+            print(self.NNLayer[layer].Derivatives
+            )
     def print_training_data(self):
         print("--train Data--")
         print("X: ",self.training_input," ,Y: ",self.training_output)

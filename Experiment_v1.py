@@ -15,3 +15,5 @@ if __name__ == '__main__':
     NN.add_Layer('softmax',2,1)
     NN.feedforward([1,2])
     print(NN.calculate_loss([1,0]))
+    NN.back_propagate([1,0])
+    NN.print_derivative()

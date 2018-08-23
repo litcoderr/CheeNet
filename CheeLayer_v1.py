@@ -20,6 +20,9 @@ class Layer:
         # Cell Storage: Can access Every Cell of this Layer
         self.NNCell = []
 
+        # Derivative Storage: Can access Every Derivatives in this layer
+        self.Derivatives = []
+
         # 1. Make the initial cells
         self.initializeCells()
 
@@ -62,7 +65,22 @@ class Layer:
         
         return self.temp_loss
     
+    # Back Propagate
+    def backProcess(self,prev_layer,target_y):
+        # calculate derivative
+        if self.layer_type == 'softmax':
+            for i in range(self.input_dimension):
+                self.Derivatives[i] = self.NNCell[i].In - target_y[i]
+        elif self.layer_type == 'sigmoid':
+            print('sigmoid back')
+
+        # send upstream gradient to lower layer
+        for cell_index in range(self.input_dimension):
+            for before_index in range(prev_layer.input_dimension):
+                prev_layer.Derivatives[before_index] = prev_layer.Derivatives[before_index] + self.Derivatives[cell_index] * prev_layer.NNCell[before_index].weights[cell_index]
+        
     # Initialize all cells in this layer
     def initializeCells(self):
         for _ in range(self.input_dimension):
             self.NNCell.append(nc.Cell(self.output_dimension))
+            self.Derivatives.append(0)
