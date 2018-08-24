@@ -12,8 +12,10 @@ if __name__ == '__main__':
     NN.add_trainingSet([[0,0],[1,0],[0,1],[1,1]],[[1,0],[0,1],[0,1],[1,0]])
 
     # Make the Architecture of the Network
-    NN.add_Layer('sigmoid',2,2)
-    NN.add_Layer('sigmoid',2,1)
+    #TODO Need to check dimensionality when adding layer
+    NN.add_Layer('sigmoid',2,3)
+    NN.add_Layer('sigmoid',3,2)
+    NN.add_Layer('softmax',2,1)
     
     # Train the Network
     NN.train()
