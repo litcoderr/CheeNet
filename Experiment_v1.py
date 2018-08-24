@@ -20,6 +20,8 @@ if __name__ == '__main__':
     # Train the Network
     NN.train()
 
+    #TODO Need function to save and load model
+
     # Test
     NN.feedforward([0,0])
     NN.print_Result()
