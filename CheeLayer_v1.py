@@ -62,7 +62,7 @@ class Layer:
         if self.layer_type == 'softmax':
             for cell_index in range(len(self.NNCell)):
                 self.temp_loss = self.temp_loss + (-1)*target_y[cell_index]*math.log(self.NNCell[cell_index].In)
-        
+        # TODO Need Sigmoid loss function
         return self.temp_loss
     
     # Back Propagate
