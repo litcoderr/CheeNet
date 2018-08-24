@@ -8,15 +8,12 @@ import CheeNet_v1 as CheeNet
 
 if __name__ == '__main__':
     # Configure Neural Net
-    NN = CheeNet.NeuralNet(learning_rate=0.1,epochs=10000,limit=0.1)
+    NN = CheeNet.NeuralNet(learning_rate=0.1,epochs=1000,limit=0.1)
     NN.add_trainingSet([[0,0],[1,0],[0,1],[1,1]],[[1,0],[0,1],[0,1],[1,0]])
 
     # Make the Architecture of the Network
-    NN.add_Layer('sigmoid',2,3)
-    NN.add_Layer('sigmoid',3,4)
-    NN.add_Layer('sigmoid',4,3)
-    NN.add_Layer('sigmoid',3,2)
-    NN.add_Layer('softmax',2,1)
+    NN.add_Layer('sigmoid',2,2)
+    NN.add_Layer('sigmoid',2,1)
     
     # Train the Network
     NN.train()
