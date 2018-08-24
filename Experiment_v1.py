@@ -11,6 +11,8 @@ if __name__ == '__main__':
     NN = CheeNet.NeuralNet(learning_rate=0.1,epochs=1000,limit=0.1)
     NN.add_trainingSet([[0,0],[1,0],[0,1],[1,1]],[[1,0],[0,1],[0,1],[1,0]])
 
+    #TODO Need training set generator
+
     # Make the Architecture of the Network
     #TODO Need to check dimensionality when adding layer
     NN.add_Layer('sigmoid',2,3)
@@ -23,5 +25,5 @@ if __name__ == '__main__':
     #TODO Need function to save and load model
 
     # Test
-    NN.feedforward([0,0])
+    NN.feedforward([1,0])
     NN.print_Result()
