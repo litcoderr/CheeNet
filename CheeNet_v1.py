@@ -25,14 +25,14 @@ class NeuralNet:
         self.current_Loss = 100 # may change
 
         # Error Detection variables
-        self.addingLayer_ErrorSwitch = True
+        self.ErrorSwitch = True
         self.currentNetdim = 0
 
         print('Initial Neural Net Call Made')
         
     def add_Layer(self,layer_type,input_d,output_d):
         # 1. Stop when Error occurse during previous layer addition
-        if self.addingLayer_ErrorSwitch:
+        if self.ErrorSwitch:
             # 2. Check if it is OK to add Layers
             self.canAddLayer = False
             if len(self.NNLayer) == 0:
@@ -47,7 +47,7 @@ class NeuralNet:
             if self.canAddLayer:
                 self.NNLayer.append(nl.Layer(layer_type,input_d,output_d))
             else:
-                self.addingLayer_ErrorSwitch = False
+                self.ErrorSwitch = False
                 print('Error: add_Layer() --> input_d should be ',self.currentNetdim)
         
         
@@ -56,18 +56,19 @@ class NeuralNet:
         self.training_output = training_output
 
     def train(self):
-        for epochs in range(self.epochs):
-            for trainingSet in range(len(self.training_input)):
-                self.doneTraining = True
-                while self.doneTraining:
-                    self.feedforward(self.training_input[trainingSet])
-                    self.temp_loss = self.calculate_loss(self.training_output[trainingSet])
-                    if self.temp_loss < self.limit:
-                        self.doneTraining = False
-                    else:
-                        self.back_propagate(self.training_output[trainingSet],self.learning_rate)
-                if epochs % 10 == 0:
-                    print("training loss : ",self.calculate_loss(self.training_output[trainingSet]))
+        if self.ErrorSwitch:
+            for epochs in range(self.epochs):
+                for trainingSet in range(len(self.training_input)):
+                    self.doneTraining = True
+                    while self.doneTraining:
+                        self.feedforward(self.training_input[trainingSet])
+                        self.temp_loss = self.calculate_loss(self.training_output[trainingSet])
+                        if self.temp_loss < self.limit:
+                            self.doneTraining = False
+                        else:
+                            self.back_propagate(self.training_output[trainingSet],self.learning_rate)
+                    if epochs % 10 == 0:
+                        print("training loss : ",self.calculate_loss(self.training_output[trainingSet]))
 
     def feedforward(self,input_x):
         # Check if input_x is valid

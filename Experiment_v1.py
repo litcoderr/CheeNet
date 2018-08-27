@@ -16,9 +16,9 @@ if __name__ == '__main__':
     # Make the Architecture of the Network
     #TODO Need to check dimensionality when adding layer
     NN.add_Layer('sigmoid',2,3)
-    NN.add_Layer('sigmoid',3,2)
+    NN.add_Layer('sigmoid',4,2)
     NN.add_Layer('softmax',2,1)
-    
+
     # Train the Network
     NN.train()
 
